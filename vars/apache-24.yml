@@ -13,6 +13,19 @@ apache_ports_configuration_items:
       regexp: "^Listen\\s+\\d+\\s+https$",
       replace: "Listen {{ apache_listen_port_ssl }} https"
   }
+  - {
+      regexp: "^SSLProtocol\\s+(.*)$",
+      replace: "SSLProtocol {{ apache_ssl_protocol }}"
+  }
+  - {
+      regexp: "^SSLCipherSuite\\s+\\S+\\s*$",
+      replace: "SSLCipherSuite {{ apache_ssl_cipher_suite }}"
+  }
+  # TODO: CAchain
+  # - {
+  #     regexp: "^(\\#|)SSLCACertificateChainFile\\s+(.+)$",
+  #     replace: "SSLCACertificateChainFile {{ certificate_chain_file }}"
+  # }
   # Debian, SUSE
   - {
       regexp: "^(\\s*<IfModule\\s+.+>(?:\\n+\\s+#.+)*\\s+)Listen\\s+\\d+",
